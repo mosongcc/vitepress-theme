@@ -1,6 +1,6 @@
 <script setup>
 import {uuid, authorizeQrcode, polling, userinfo} from './login.js'
-import {$store, setStore} from '../../store.js'
+import {$store, setStore} from '../store.js'
 import {state} from './state.js'
 import LoginDialog from './login-dialog.vue'
 
