@@ -1,5 +1,6 @@
 <script setup>
-import {uuid, authorizeQrcode, polling, userinfo} from './login.js'
+import {authorizeQrcode, polling, userinfo} from './login.js'
+import {uuid} from "../../utils/http";
 import {$store, setStore} from '../store.js'
 import {state} from './state.js'
 import LoginDialog from './login-dialog.vue'
@@ -39,7 +40,7 @@ async function pollingTimeout(cid) {
 <template>
   <div class="login">
     <div @click="login" class="name">
-      <img v-if="!$store.user.avatar" src="/vitepress-logo-large.webp" class="avatar">
+      <img v-if="!$store.user.avatar" src="./default-avatar.webp" class="avatar">
       <img v-if="$store.user.avatar" :src="$store.user.avatar" class="avatar">
       <span class="nickname">{{ $store.isLogin ? ($store.user.nickname || '用户') : '登录' }}</span>
     </div>

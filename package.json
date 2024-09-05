@@ -1,0 +1,7 @@
+{
+  "license": "MIT",
+  "devDependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "remark": "devDependencies 配置当前主题使用的依赖"
+}

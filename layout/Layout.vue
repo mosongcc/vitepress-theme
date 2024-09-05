@@ -1,7 +1,7 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme';
 import Login from './login/login.vue';
-import PayVipView from "./pay-vip-view/index.vue"
+import VipPay from "./vip-pay/index.vue"
 
 const {Layout} = DefaultTheme
 
@@ -23,7 +23,7 @@ const {Layout} = DefaultTheme
     </template>
 
     <template #layout-bottom>
-      <PayVipView></PayVipView>
+      <VipPay></VipPay>
     </template>
 
   </Layout>
