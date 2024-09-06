@@ -18,7 +18,10 @@ VitePress默认主题扩展。
 
 
 
+🎈🛍️🔒🔐🔓
 
+## qrcode
 
+https://www.npmjs.com/package/qrcode  
 
 

@@ -1,7 +1,6 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme';
 import Login from './login/login.vue';
-import VipPay from "./vip-pay/index.vue"
 
 const {Layout} = DefaultTheme
 
@@ -17,13 +16,12 @@ const {Layout} = DefaultTheme
 
     </template>
 
-    <!-- 当 layout: 'doc' 时启用，显示在doc最下面   -->
     <template #doc-after>
 
     </template>
 
     <template #layout-bottom>
-      <VipPay></VipPay>
+
     </template>
 
   </Layout>

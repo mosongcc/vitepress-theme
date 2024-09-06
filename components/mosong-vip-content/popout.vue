@@ -1,16 +1,24 @@
 <script setup>
-import {state} from './state.js';
+import {state} from './state'
+import {submit} from './popout'
 
 
 </script>
 
+<!--支付弹框界面-->
 <template>
   <Teleport to="body">
-    <div class="popout" v-if="state.visible">
+    <div class="vip-popout" v-if="state.visible">
       <div class="shade" @click="state.visible=false"></div>
       <div class="content">
-        <!--<img class="qrimg" :src="dat.qrimg">-->
-        <p>倒计时：60s</p>
+        <div class="vip1">
+          年费会员，
+        </div>
+        <div class="vip2">
+          永久会员
+        </div>
+        <button @click="submit('240001')">支付</button>
+        <img v-if="state.payQrcode" :src="state.payQrcode">
       </div>
     </div>
   </Teleport>
@@ -18,7 +26,7 @@ import {state} from './state.js';
 
 <style scoped>
 
-.popout .shade {
+.vip-popout .shade {
   position: absolute;
   z-index: 10000;
   top: 0px;
@@ -29,7 +37,7 @@ import {state} from './state.js';
   opacity: 0.5;
 }
 
-.popout .content {
+.vip-popout .content {
   position: absolute;
   z-index: 10001;
   top: 15vw;
