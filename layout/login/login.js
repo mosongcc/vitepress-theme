@@ -1,5 +1,12 @@
 import QRCode from "qrcode";
 import {httpPost} from "../../utils/http";
+import {reactive} from "vue";
+
+// 组件状态值
+export const $state = reactive({
+    qrimg: '',
+    tips:''
+})
 
 export function authorize(state) {
     return `${window.location.protocol}//${window.location.host}/vpapi/meb/weixin-authorize?scope=snsapi_userinfo&state=${state}`

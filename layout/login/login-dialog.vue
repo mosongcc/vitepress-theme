@@ -1,17 +1,18 @@
 <script setup>
-import {state} from "./state.js";
+import {$store} from "../../store";
+import {$state} from "./login";
 </script>
 
 <template>
   <Teleport to="body">
     <!-- 弹出登录框  -->
-    <div class="dialog" v-if="state.visible">
-      <div class="shade" @click="state.visible=false"></div>
+    <div class="dialog" v-if="$store.loginVisible">
+      <div class="shade" @click="$store.loginVisible=false"></div>
       <div class="content">
         <h3>微信扫码登录</h3>
-        <img class="qrimg" :src="state.qrimg">
-        <p class="tips">{{ state.tips }}</p>
-        <button class="cancel" @click="state.visible=false">取消</button>
+        <img class="qrimg" :src="$state.qrimg">
+        <p class="tips">{{ $state.tips }}</p>
+        <button class="cancel" @click="$store.loginVisible=false">取消</button>
       </div>
     </div>
   </Teleport>

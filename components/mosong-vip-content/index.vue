@@ -5,6 +5,7 @@
 -->
 <script setup>
 import {ref} from 'vue'
+import {$store} from "../../store";
 import Popout from "./popout.vue";
 import {state} from "./state";
 
@@ -15,6 +16,14 @@ if (typeof window !== 'undefined') {
 }
 
 //const props = defineProps({})
+
+function buy() {
+  if (!$store.isLogin) {
+    $store.loginVisible = true
+    return
+  }
+  state.visible = true
+}
 
 </script>
 
@@ -29,8 +38,10 @@ if (typeof window !== 'undefined') {
     <span class="mosong-vip-content-end"></span>
     <div class="vip-block">
       <div class="content">
-        <p>💞开通VIP，阅读全部会员文章</p>
-        <button class="btn" @click="state.visible=true">🔒去开通</button>
+        <p>💞开通VIP，阅读全部会员文章。
+          <template v-if="!$store.isLogin">如果你已经开通，请 <a @click="$store.loginVisible=true">登录</a></template>
+        </p>
+        <button class="btn" @click="buy">🔒去开通</button>
       </div>
       <popout></popout>
     </div>

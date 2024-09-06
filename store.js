@@ -6,6 +6,7 @@ const mss_store = "mss_store"
 export const $store = reactive({
     isLogin: false,//是否已登录
     user: {uid: '', nickname: '', avatar: ''},// 登录用户信息
+    loginVisible: false,// 是否显示登录弹框
 })
 
 // 赋值
