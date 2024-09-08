@@ -4,6 +4,7 @@ import {reactive} from "vue";
 export const state = reactive({
     visible: false,
     payQrcode: "",
+    active:''
 })
 
 export default {state}

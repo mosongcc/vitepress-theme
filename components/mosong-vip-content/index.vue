@@ -32,7 +32,7 @@ function buy() {
     <span class="mosong-vip-content-beg"></span>
   </div>
 
-  <slot></slot>
+  <template v-if="$store.isLogin"><slot></slot></template>
 
   <div :style="{display: isDev?'block':'none'}">
     <span class="mosong-vip-content-end"></span>
