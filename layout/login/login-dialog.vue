@@ -1,6 +1,6 @@
 <script setup>
 import {$store} from "../../store";
-import {$state} from "./login";
+import {datum} from "./login";
 </script>
 
 <template>
@@ -10,8 +10,8 @@ import {$state} from "./login";
       <div class="shade" @click="$store.loginVisible=false"></div>
       <div class="content">
         <h3>微信扫码登录</h3>
-        <img class="qrimg" :src="$state.qrimg">
-        <p class="tips">{{ $state.tips }}</p>
+        <img class="qrimg" :src="datum.qrimg">
+        <p class="tips">{{ datum.tips }}</p>
         <button class="cancel" @click="$store.loginVisible=false">取消</button>
       </div>
     </div>

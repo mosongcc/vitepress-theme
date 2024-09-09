@@ -1,40 +1,8 @@
 <script setup>
-import {watch} from 'vue'
-import {$state, authorizeQrcode, polling, userinfo} from './login'
-import {uuid} from "../../utils/http";
-import {$store, setStore} from '../../store'
-import LoginDialog from './login-dialog.vue'
-
-
-const login = async () => {
-  if ($store.isLogin) {
-    console.log("已登录成功")
-    $store.loginVisible = false
-    return
-  }
-  // 电脑浏览器显示二维码
-  const cid = uuid()
-  $state.qrimg = await authorizeQrcode(cid)
-  await pollingTimeout(cid)
-  //$store.loginVisible = true // 显示登录弹框
-
-  //TODO 手机微信，直接跳转授权
-}
-
-async function pollingTimeout(cid) {
-  if ($store.loginVisible) {
-    const body = await polling(cid)
-    //授权成功
-    if (body && body.status === '1') {
-      let user = await userinfo()
-      setStore({user, isLogin: true})
-      $store.loginVisible = false//登录成功关弹框
-      return
-    }
-  }
-  setTimeout(async () => await pollingTimeout(cid), 5 * 1000)
-}
-
+import {watch} from 'vue';
+import {datum, login} from './login';
+import {$store} from '../../store';
+import LoginDialog from './login-dialog.vue';
 
 //显示登录框
 watch(() => $store.loginVisible, async (n, o) => {
@@ -42,6 +10,7 @@ watch(() => $store.loginVisible, async (n, o) => {
     await login()
   }
 })
+
 </script>
 
 <template>

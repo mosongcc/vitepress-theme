@@ -1,12 +1,18 @@
 <script setup>
-import {state} from './state'
-import {submit} from './popout'
-import QRCode from "qrcode";
+import {watch} from "vue";
+import {state} from './state';
+import {productList, selectVip} from './popout';
 
-async function selectVip(active) {
-  state.active = active;
-  state.payQrcode = (await QRCode.toDataURL(active, {width: 400, margin: 0}))
-}
+// 弹出购买界面时查询产品
+watch(() => state.visible, async () => {
+  if (state.visible) {
+    state.datum = await productList()
+    if (state.datum.items && state.datum.items.length > 0) {
+      await selectVip(state.datum.items[1].buy_url)
+    }
+  }
+})
+
 
 </script>
 
@@ -16,57 +22,22 @@ async function selectVip(active) {
     <div class="vip-popout" v-if="state.visible">
       <div class="shade" @click="state.visible=false"></div>
       <div class="content">
-        <div class="close">X</div>
+        <div class="close" @click="state.visible=false">X</div>
         <div class="title"><h1>开通会员</h1></div>
         <div class="section">
           <div class="prods">
-            <div class="prod" @click="selectVip('0')">
-              <div :class="state.active==='0' ? 'msprod msprod-active' : 'msprod'">
-                <h2>免费用户</h2>
-                <div class="price"><span class="unitPrice"><span class="amt">免费</span></span></div>
-                <ul class="rights">
-                  <li>限开放内容</li>
-                </ul>
-              </div>
-            </div>
-            <div class="prod" @click="selectVip('1')">
-              <div :class="state.active==='1' ? 'msprod msprod-active' : 'msprod'">
-                <h2>当前文档</h2>
-                <div class="price">
-                  <span class="unitPrice">¥<span class="amt">9.9</span></span>
-                  <span class="markPrice">¥<span>39</span></span>
+            <template v-for="(prod,index) in state.datum.items" :key="index">
+              <div class="prod" @click="selectVip(prod.buy_url)">
+                <div :class="state.active===prod.buy_url ? 'msprod msprod-active' : 'msprod'">
+                  <h2>{{ prod.prod_name }}</h2>
+                  <div class="price">
+                    <span class="unitPrice">¥<span class="amt">{{ (prod.unit_price / 100).toFixed(2) }}</span></span>
+                    <span class="markPrice">¥<span>{{ (prod.mark_price / 100).toFixed(2) }}</span></span>
+                  </div>
+                  <div class="rights" v-html="prod.intro"></div>
                 </div>
-                <ul class="rights">
-                  <li>全部免费内容</li>
-                  <li>全部VIP内容</li>
-                  <li>包含持续更新...</li>
-                </ul>
               </div>
-            </div>
-            <div class="prod" @click="selectVip('2')">
-              <div :class="state.active==='2' ? 'msprod msprod-active' : 'msprod'">
-                <h2>VIP 年卡会员</h2>
-                <div class="price"><span class="unitPrice">¥<span class="amt">98</span>/年</span> <span
-                    class="markPrice">¥<span>365</span>/年</span></div>
-                <ul class="rights">
-                  <li>全部免费内容</li>
-                  <li>全部VIP内容</li>
-                  <li>包含持续更新...</li>
-                </ul>
-              </div>
-            </div>
-            <!--            <div class="prod" @click="selectVip('3')">
-                          <div :class="state.active==='3'? 'msprod msprod-active' : 'msprod'">
-                            <h2>VIP 永久会员</h2>
-                            <div class="price"><span class="unitPrice">¥<span class="amt">399</span>/年</span> <span
-                                class="markPrice">¥<span>1200</span>/年</span></div>
-                            <ul class="rights">
-                              <li>全部免费内容</li>
-                              <li>全部VIP内容</li>
-                              <li>包含持续更新...</li>
-                            </ul>
-                          </div>
-                        </div>-->
+            </template>
           </div>
           <div class="pay" v-if="state.active&&state.active!=='0'">
             <div class="qrcode">

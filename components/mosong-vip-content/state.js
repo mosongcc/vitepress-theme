@@ -4,7 +4,10 @@ import {reactive} from "vue";
 export const state = reactive({
     visible: false,
     payQrcode: "",
-    active:''
+    active: '',
+    datum: {
+        items: []//产品列表
+    },
 })
 
 export default {state}
