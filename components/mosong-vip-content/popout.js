@@ -1,6 +1,7 @@
 import QRCode from "qrcode";
-import {state} from './state.js';
+import {data} from './data.js';
 import {httpPost} from "../../utils/http";
+import {watch} from "vue";
 
 // 查询产品
 export async function productList() {
@@ -9,9 +10,20 @@ export async function productList() {
 
 // 选择会员
 export async function selectVip(active) {
-    state.active = active;
-    state.payQrcode = (await QRCode.toDataURL(active, {width: 400, margin: 0}))
+    data.active = active;
+    data.payQrcode = (await QRCode.toDataURL(active, {width: 400, margin: 0}))
 }
+
+
+// 弹出购买界面时查询产品
+watch(() => data.visible, async () => {
+    if (data.visible) {
+        data.datum = await productList()
+        if (data.datum.items && data.datum.items.length > 0) {
+            await selectVip(data.datum.items[1].buy_url)
+        }
+    }
+})
 
 export default {
     selectVip,

@@ -7,7 +7,7 @@
 import {ref} from 'vue'
 import {$store} from "../../store";
 import Popout from "./popout.vue";
-import {state} from "./state";
+import {data} from "./data";
 
 // 开发环境显示所有内容
 const isDev = ref(false)
@@ -15,14 +15,12 @@ if (typeof window !== 'undefined') {
   isDev.value = window.location.href.indexOf('://localhost') !== -1
 }
 
-//const props = defineProps({})
-
 function buy() {
   if (!$store.isLogin) {
     $store.loginVisible = true
     return
   }
-  state.visible = true
+  data.visible = true
 }
 
 </script>
@@ -32,7 +30,7 @@ function buy() {
     <span class="mosong-vip-content-beg"></span>
   </div>
 
-  <template v-if="$store.isLogin"><slot></slot></template>
+  <template v-if="$store.user.type==='vip'"><slot></slot></template>
 
   <div :style="{display: isDev?'block':'none'}">
     <span class="mosong-vip-content-end"></span>

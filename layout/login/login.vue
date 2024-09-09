@@ -1,6 +1,6 @@
 <script setup>
 import {watch} from 'vue';
-import {datum, login} from './login';
+import {login} from './login';
 import {$store} from '../../store';
 import LoginDialog from './login-dialog.vue';
 

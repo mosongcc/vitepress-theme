@@ -1,12 +1,12 @@
 import QRCode from "qrcode";
 import {httpPost, uuid} from "../../utils/http";
 import {reactive} from "vue";
-import {$store, getUser, setStore} from "../../store";
+import {$store, getUser} from "../../store";
 
 // 组件状态值
 export const datum = reactive({
-    qrimg: '',
-    tips: '',
+    qrimg: '',// 二维码，微信扫码登录
+    tips: '',//提升信息
     pollNum: 0,//轮询重试次数，最多10次停止
 })
 

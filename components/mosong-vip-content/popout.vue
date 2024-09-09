@@ -1,34 +1,22 @@
 <script setup>
-import {watch} from "vue";
-import {state} from './state';
-import {productList, selectVip} from './popout';
-
-// 弹出购买界面时查询产品
-watch(() => state.visible, async () => {
-  if (state.visible) {
-    state.datum = await productList()
-    if (state.datum.items && state.datum.items.length > 0) {
-      await selectVip(state.datum.items[1].buy_url)
-    }
-  }
-})
-
+import {data} from "./data";
+import {selectVip} from './popout';
 
 </script>
 
 <!--支付弹框界面-->
 <template>
   <Teleport to="body">
-    <div class="vip-popout" v-if="state.visible">
-      <div class="shade" @click="state.visible=false"></div>
+    <div class="vip-popout" v-if="data.visible">
+      <div class="shade" @click="data.visible=false"></div>
       <div class="content">
-        <div class="close" @click="state.visible=false">X</div>
+        <div class="close" @click="data.visible=false">X</div>
         <div class="title"><h1>开通会员</h1></div>
         <div class="section">
           <div class="prods">
-            <template v-for="(prod,index) in state.datum.items" :key="index">
+            <template v-for="(prod,index) in data.datum.items" :key="index">
               <div class="prod" @click="selectVip(prod.buy_url)">
-                <div :class="state.active===prod.buy_url ? 'msprod msprod-active' : 'msprod'">
+                <div :class="data.active===prod.buy_url ? 'msprod msprod-active' : 'msprod'">
                   <h2>{{ prod.prod_name }}</h2>
                   <div class="price">
                     <span class="unitPrice">¥<span class="amt">{{ (prod.unit_price / 100).toFixed(2) }}</span></span>
@@ -39,10 +27,10 @@ watch(() => state.visible, async () => {
               </div>
             </template>
           </div>
-          <div class="pay" v-if="state.active&&state.active!=='0'">
+          <div class="pay" v-if="data.active&&data.active!=='0'">
             <div class="qrcode">
               <div>
-                <img class="qrcodeimg" v-if="state.payQrcode" :src="state.payQrcode">
+                <img class="qrcodeimg" v-if="data.payQrcode" :src="data.payQrcode">
                 <p>请使用微信扫码支付</p>
                 <!--            <button @click="submit('240001')">支付</button>-->
               </div>
