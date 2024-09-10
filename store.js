@@ -13,8 +13,14 @@ export const $store = reactive({
 // 赋值
 export const setStore = function (v = {}) {
     let dat = Object.assign($store, v)
+    //指定需要持久化存储的字段
+    let storageFields = ['isLogin', 'user']
+    let data = {}
+    for (let storageField of storageFields) {
+        data[storageField] = dat[storageField]
+    }
     if (typeof window !== 'undefined') {
-        sessionStorage.setItem(mss_store, JSON.stringify(dat))
+        sessionStorage.setItem(mss_store, JSON.stringify(data))
     }
 };
 
@@ -25,11 +31,15 @@ export const getUser = async function () {
     }
     let store = sessionStorage.getItem(mss_store)
     if (store) {
-        setStore(JSON.parse(store))
-    } else {
-        let user = await httpPost("/vpapi/meb/userinfo", {})
-        setStore({user, isLogin: true})
+        let s = JSON.parse(store)
+        // 登录状态才使用缓存
+        if (s.isLogin) {
+            setStore(s)
+            return $store.user
+        }
     }
+    let user = await httpPost("/vpapi/meb/userinfo", {})
+    setStore({user, isLogin: true})
     return $store.user
 };
 

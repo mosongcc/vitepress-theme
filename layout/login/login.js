@@ -35,11 +35,15 @@ export async function polling(state) {
         datum.pollNum = 0;
         return
     }
-    let body = await httpPost("/vpapi/meb/oauth-polling", {state})
-    if (body && body.status === '1') {
-        await getUser()
-        $store.loginVisible = false; //登录成功关弹框
-        return
+    try {
+        let body = await httpPost("/vpapi/meb/oauth-polling", {state})
+        if (body && body.status === '1') {
+            await getUser()
+            $store.loginVisible = false; //登录成功关弹框
+            return
+        }
+    } catch (e) {
+        console.log(e)
     }
     setTimeout(async () => await polling(state), 3 * 1000)
 }
@@ -57,6 +61,11 @@ export async function login() {
     setTimeout(async () => await polling(cid), 6 * 1000)
 
     //TODO 手机微信，直接跳转授权
+}
+
+// 退出登录
+export async function logout() {
+    await httpPost("/vpapi/meb/logout", {})
 }
 
 export default {

@@ -30,9 +30,9 @@ function buy() {
     <span class="mosong-vip-content-beg"></span>
   </div>
 
-  <template v-if="$store.user.type==='vip'"><slot></slot></template>
+  <template v-if="$store.user.type==='vip' || isDev "><slot></slot></template>
 
-  <div :style="{display: isDev?'block':'none'}">
+  <div :style="{display: ($store.user.type!=='vip'||isDev)?'block':'none'}">
     <span class="mosong-vip-content-end"></span>
     <div class="vip-block">
       <div class="content">
