@@ -16,8 +16,8 @@ import {selectVip} from './popout';
         <div class="section">
           <div class="prods">
             <template v-for="(prod,index) in data.datum.items" :key="index">
-              <div class="prod" @click="selectVip(prod.buy_url)">
-                <div :class="data.active===prod.buy_url ? 'msprod msprod-active' : 'msprod'">
+              <div class="prod" @click="selectVip(prod.prod_id,prod.buy_url)">
+                <div :class="data.active===prod.prod_id ? 'msprod msprod-active' : 'msprod'">
                   <h2>{{ prod.prod_name }}</h2>
                   <div class="price">
                     <span class="unitPrice">¥<span class="amt">{{ (prod.unit_price / 100).toFixed(2) }}</span></span>
@@ -43,6 +43,10 @@ import {selectVip} from './popout';
   </Teleport>
 </template>
 
+<style scoped>
+@import "popout.css";
+</style>
+
 <style>
 
 .msprod {
@@ -57,106 +61,4 @@ import {selectVip} from './popout';
   border: solid 2px #fa9321;
 }
 
-</style>
-
-<style scoped>
-
-.vip-popout .shade {
-  position: absolute;
-  z-index: 10000;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 100vh;
-  background: #1b1b1f;
-  opacity: 0.5;
-}
-
-.content {
-  position: absolute;
-  z-index: 10001;
-  top: 15vw;
-  left: 25vw;
-  width: 50vw;
-  background: #ffffff;
-  opacity: 1;
-  border-radius: 15px;
-  overflow: hidden;
-  color: #5d5d68;
-}
-
-.close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-}
-
-.title {
-  padding: 15px;
-  background-color: #eff0f3;
-}
-
-.section {
-  width: 90%;
-  margin: 0 auto 30px auto;
-}
-
-.prods {
-  display: flex;
-  justify-content: center;
-  padding: 15px 0;
-  margin: 0px auto;
-}
-
-.prod {
-  width: 180px;
-  margin: 15px;
-}
-
-.prod h2 {
-  font-weight: bold;
-}
-
-.prod .price {
-  color: #fa9321;
-  margin: 5px 0;
-  font-size: 12px;
-}
-
-.prod .unitPrice {
-}
-
-.prod .unitPrice .amt {
-  font-size: 16px
-}
-
-.markPrice {
-  margin-left: 5px;
-  text-decoration-line: line-through;
-  color: #babbbd;
-  font-size: 12px;
-}
-
-.prod .rights {
-  font-size: 14px;
-}
-
-.pay {
-
-  border-top: solid 1px #eee;
-}
-
-.qrcode {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  font-size: 14px;
-}
-
-.qrcodeimg {
-  width: 200px;
-  height: 200px;
-  border: solid 1px #e4efea;
-  margin: 20px auto;
-}
 </style>

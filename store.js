@@ -24,6 +24,12 @@ export const setStore = function (v = {}) {
     }
 };
 
+export const userinfo = async function () {
+    let user = await httpPost("/vpapi/meb/userinfo", {})
+    setStore({user, isLogin: true})
+    return user;
+}
+
 // 查询用户信息
 export const getUser = async function () {
     if (typeof window == 'undefined') {
@@ -38,10 +44,10 @@ export const getUser = async function () {
             return $store.user
         }
     }
-    let user = await httpPost("/vpapi/meb/userinfo", {})
-    setStore({user, isLogin: true})
+    await userinfo()
     return $store.user
 };
+
 
 (async function () {
     await getUser(); //初始化加载用户信息
@@ -51,4 +57,5 @@ export default {
     $store,
     setStore,
     getUser,
+    userinfo,
 }
