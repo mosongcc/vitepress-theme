@@ -1,7 +1,7 @@
 import QRCode from "qrcode";
 import {httpPost, uuid} from "../../utils/http";
 import {reactive} from "vue";
-import {$store, getUser} from "../../store";
+import {$store, userinfo} from "../../store";
 import {$data} from "./data";
 
 // 组件状态值
@@ -39,7 +39,7 @@ export async function polling(state) {
     try {
         let body = await httpPost("/vpapi/meb/oauth-polling", {state})
         if (body && body.status === '1') {
-            await getUser()
+            await userinfo()
             $store.loginVisible = false; //登录成功关弹框
             return
         }
