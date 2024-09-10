@@ -2,6 +2,7 @@ import QRCode from "qrcode";
 import {httpPost, uuid} from "../../utils/http";
 import {reactive} from "vue";
 import {$store, getUser} from "../../store";
+import {$data} from "./data";
 
 // 组件状态值
 export const datum = reactive({
@@ -53,6 +54,8 @@ export async function login() {
     if ($store.isLogin) {
         $store.loginVisible = false
         console.log("已登录成功")
+
+        $data.userPanelVisible = !$data.userPanelVisible; // 个人信息面板显示切换
         return
     }
     // 电脑浏览器显示二维码

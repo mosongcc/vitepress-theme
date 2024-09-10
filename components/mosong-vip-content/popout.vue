@@ -2,9 +2,10 @@
 import {data} from "./data";
 import {selectVip} from './popout';
 
+// 购买会员组件在 /layout/Layout.vue 全局使用
 </script>
 
-<!--支付弹框界面-->
+<!--支付弹框界面 -->
 <template>
   <Teleport to="body">
     <div class="vip-popout" v-if="data.visible">
@@ -32,7 +33,6 @@ import {selectVip} from './popout';
               <div>
                 <img class="qrcodeimg" v-if="data.payQrcode" :src="data.payQrcode">
                 <p>请使用微信扫码支付</p>
-                <!--            <button @click="submit('240001')">支付</button>-->
               </div>
             </div>
             <div class="records"></div>

@@ -10,4 +10,4 @@ export const data = reactive({
     },
 })
 
-export default {data}
+export default {data};

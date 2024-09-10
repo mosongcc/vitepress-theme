@@ -2,17 +2,19 @@
 import {$store, setStore} from "../../store";
 import {$data} from "./data";
 import {logout} from "./login";
+import {data as mosongVipContentData} from '../../components/mosong-vip-content/data'
 
 
 function mouseout(event) {
   if (!event.currentTarget.contains(event.relatedTarget)) {
-    $data.userPanelVisible = false
+    $data.userPanelVisible = false;
   }
 }
 
 async function exit() {
-  setStore({isLogin: false, user: {}})
-  await logout()
+  $data.userPanelVisible = false;
+  setStore({isLogin: false, user: {}});
+  await logout();
 }
 
 </script>
@@ -28,7 +30,9 @@ async function exit() {
           <div class="uid">UID：{{ $store.user.uid }}</div>
         </div>
       </div>
-      <div class="row-vip" v-if="$store.user.type==='vip'"><span>VIP至：{{ $store.user.vip_date }} </span><a>续费</a>
+      <div class="row-vip" v-if="$store.user.type==='vip'">
+        <span>VIP至：{{ $store.user.vip_date }} </span>
+        <a @click="mosongVipContentData.visible=true">续费</a>
       </div>
       <div class="exit">
         <button class="exitBtn" @click="exit">退出登录</button>

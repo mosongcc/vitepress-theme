@@ -6,7 +6,6 @@
 <script setup>
 import {ref} from 'vue'
 import {$store} from "../../store";
-import Popout from "./popout.vue";
 import {data} from "./data";
 
 // 开发环境显示所有内容
@@ -41,7 +40,6 @@ function buy() {
         </p>
         <button class="btn" @click="buy">🔒去开通</button>
       </div>
-      <popout></popout>
     </div>
     <div style="display: none;">
       <a href="https://vitepress.mosong.cc">VitePress主题</a>
