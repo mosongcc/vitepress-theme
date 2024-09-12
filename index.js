@@ -1,15 +1,17 @@
 import DefaultTheme from 'vitepress/theme'
 import Layout from './layout/Layout.vue'
 import './style/var.css'
-import WeixinGzhQrcode from './components/weixin-gzh-qrcode/index.vue'
 import MosongVipContent from './components/mosong-vip-content/index.vue'
+import QrcodeMp from './components/qrcode-mp/index.vue'
+import QrcodeWx from './components/qrcode-wx/index.vue'
 
 export default {
     extends: DefaultTheme,
     enhanceApp({app, router}) {
         const components = {
-            WeixinGzhQrcode,
             MosongVipContent,
+            QrcodeMp,
+            QrcodeWx
         }
         for (let k in components) {
             app.component(k, components[k])
