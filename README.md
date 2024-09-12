@@ -2,7 +2,7 @@
 
 VitePress默认主题扩展。
 
-**通过Git子项目使用此主题扩展项目。**
+**通过Git子项目使用此主题。**
 
 ## 增加功能
 
@@ -16,12 +16,5 @@ VitePress默认主题扩展。
 - 微信网页授权
 - 微信内支付，开通会员阅读付费内容
 
-
-
-🎈🛍️🔒🔐🔓
-
-## qrcode
-
-https://www.npmjs.com/package/qrcode  
 
 
