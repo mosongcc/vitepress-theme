@@ -14,4 +14,4 @@ export function install(app) {
     }
 }
 
-export default {...components, install};
+export default components;
