@@ -1,6 +1,6 @@
 ## VitePress Theme
 
-主题主页：[https://vitepress.mosong.cc]https://vitepress.mosong.cc
+主题主页：[https://vitepress.mosong.cc](https://vitepress.mosong.cc)
 
 **通过Git子项目使用此主题。**
 
